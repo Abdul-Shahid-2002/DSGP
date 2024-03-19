@@ -20,6 +20,7 @@ if not st.session_state.authentication_status:
     st.stop()
 
 load_dotenv()
+os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 
 llm = ChatOpenAI(api_key = os.getenv("OPENAI_API_KEY"))
 
