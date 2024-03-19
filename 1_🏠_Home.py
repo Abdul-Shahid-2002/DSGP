@@ -26,21 +26,27 @@ if authentication_status == None:
 
 if authentication_status:
 
-    st.title('WELCOME TO DATA HABOUR 🚢')
-
-    st.header('🌊Test the Waters')
-    st.subheader('Understand your customers and competition before you make decisions')
-    st.write("Research")
-    st.write("Structured: Chat with tabular data store in a SQL database")
-    st.write("            Data contains Customers and Watches    ")
-    st.write("Unstructured: Chat with textual data stored in a Vector Database")
-    st.write("              Contains textual data about some watches")
-
-    st.header('🌊Take the plunge')
-    st.subheader('Generate tailor made marketing decisions unique to each customer')
-    st.write("Research analyzer: A Chat bot used to analyze customer sentiments on Watch types")
-    st.write("Decisions: Analyse Customer plots . ")
-    st.write("           Analyze Customer segments using kmeans and Vector database")
+    st.title('🚢 WELCOME TO DATA HARBOR 🚢')
+    st.write("🌊" * 32)
+    st.write("➖" * 32)
+    st.header('1. Test the Waters ⛵')
+    #st.subheader('Understand your customers and competition before you make decisions')
+    st.write("➖"*32)
+    st.subheader("Research Structured: ")
+    st.text("> Chat with tabular data store in a SQL database")
+    st.text("> Data contains Customers and Watches")
+    st.subheader(" Research Unstructured: ")
+    st.text("> Chat with textual data stored in a Vector Database")
+    st.text("> Contains textual data about some watches")
+    st.write("➖" * 32)
+    st.header('2. Take the plunge🌊 ')
+    st.write("➖" * 32)
+    #st.subheader('Generate tailor made marketing decisions unique to each customer')
+    st.subheader("Research analyzer: ")
+    st.text("> A Chat bot used to analyze customer sentiments on Watch types")
+    st.subheader("Decisions:")
+    st.text("> Analyse Customer plots ")
+    st.text("> Analyze Customer segments using kmeans and Vector database")
     authenticator.logout("Logout", "sidebar")
 
 
