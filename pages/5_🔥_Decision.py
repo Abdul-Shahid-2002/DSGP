@@ -14,9 +14,9 @@ import plotly.express as px
 # Dataset: customer index
 # Dataset: Customers csv
 
-# if not st.session_state.authentication_status:
-#     st.info('Please Login from the Home page and try again.')
-#     st.stop()
+if not st.session_state.authentication_status:
+    st.info('Please Login from the Home page and try again.')
+    st.stop()
 
 st.header("🎇Analyze Customer Segments🎆")
 

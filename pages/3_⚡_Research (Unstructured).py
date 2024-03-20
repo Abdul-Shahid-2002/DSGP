@@ -12,6 +12,9 @@ from langchain_core.prompts import ChatPromptTemplate
 
 
 # Dataset: Unstructured Data pdf
+if not st.session_state.authentication_status:
+    st.info('Please Login from the Home page and try again.')
+    st.stop()
 
 st.header("⚡ Analyze Unstructured Textual data")
 st.write("")

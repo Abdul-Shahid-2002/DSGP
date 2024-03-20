@@ -18,6 +18,10 @@ import random
 # Dataset: vectorizer file
 # Dataset: trained lr
 
+if not st.session_state.authentication_status:
+    st.info('Please Login from the Home page and try again.')
+    st.stop()
+
 st.header("🌟 Analyze Customer Reviews")
 st.write("")
 st.write("🟣 Here you can analyze customer reviews on some Watch types")
