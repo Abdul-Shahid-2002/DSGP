@@ -146,7 +146,7 @@ if option or prompt:
     with st.chat_message("user"):
         st.markdown(question)
     question = question.lower()
-    st.session_state.messages2.append({"role": "user", "content": question})
+    #st.session_state.messages2.append({"role": "user", "content": question})
     sql_query = get_query(question)
     reviews = get_reviews(sql_query)
     positive_list, negative_list, neutral_list = get_sentiment(reviews)
