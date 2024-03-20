@@ -61,7 +61,7 @@ def get_res(question):
     return rag_chain.invoke(question)
 
 option = st.selectbox(
-    'Query Unstructerd Data', (
+    'Query Unstructured Data', (
         'What kind of data is stored here',
         'List all the watch names',
         'What are some cons of the casio A168',

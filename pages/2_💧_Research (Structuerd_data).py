@@ -105,7 +105,7 @@ def get_NL_responce(sql_responce,question):
 
 option = st.selectbox(
     "Query Database", (
-        "What are the tables in the database"
+        "What are the tables in the database",
         'What are the columns in the customer table',
         'How many male customer exist',
         'How many customers are between the age range 20-25',
