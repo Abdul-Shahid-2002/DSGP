@@ -19,6 +19,9 @@ import random
 # Dataset: trained lr
 
 st.header("🌟 Analyze Customer Reviews")
+st.write("")
+st.write("🟣 Here you can analyze customer reviews on some Watch types")
+st.write("🟣 Try some of the prompts in the drop down to begin")
 
 nltk.download('stopwords')
 
@@ -34,12 +37,12 @@ if 'model' not in st.session_state:
 # if "db" not in st.session_state:
 #     st.session_state["db"] = SQLDatabase.from_uri("sqlite:///CReviews.db")
 
-if "messages2" not in st.session_state:
-    st.session_state.messages2 = []
-
-for message in st.session_state.messages2:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+# if "messages2" not in st.session_state:
+#     st.session_state.messages2 = []
+#
+# for message in st.session_state.messages2:
+#     with st.chat_message(message["role"]):
+#         st.markdown(message["content"])
 
 def get_schema(_):
     return db.get_table_info()
@@ -115,35 +118,52 @@ def get_sentiment(reviews):
 
     return positive_list, negative_list, neutral_list
 
-if question := st.chat_input("How can I help"):
+option = st.selectbox(
+    '', (
+        'Give me the neutral watch reviews for a watch type equal to digital',
+        'Give me the positive watch reviews for a watch type equal to smart',
+        'Negative watch reviews for a watch type equal to field',
+        'Negative watch reviews for a watch type equal to formal',
+        'Nositive watch reviews for a watch type equal to digital',
+        'Negative watch reviews for a watch type equal to smart'
+    ), index=None, placeholder='Try some default prompts to start out')
+
+if prompt := st.chat_input("How can I help"):
+    option = None
+
+if option or prompt:
+    if option:
+        question = option
+    else:
+        question = prompt
+
+    option = None
+    prompt = None
     with st.chat_message("user"):
         st.markdown(question)
+    question = question.lower()
     st.session_state.messages2.append({"role": "user", "content": question})
-
-    # Display chat-bot message in chat container
-    #with st.chat_message("assistant"):
-        #message_placeholder = st.empty()
-
     sql_query = get_query(question)
-    #st.write(sql_query)
     reviews = get_reviews(sql_query)
     positive_list, negative_list, neutral_list = get_sentiment(reviews)
 
     if "positive" in question:
         st.header("Positive reviews")
-        for r in random.sample(positive_list,30):
+        for r in random.sample(positive_list,20):
             #with st.chat_message("🗯"):
             st.write(f"⭐{r}")
             st.write('➖'*32)
     elif "negative" in question:
         st.header("Negative reviews")
-        for r in random.sample(negative_list,30):
+        for r in random.sample(negative_list,20):
+            st.write(f"⭐{r}")
+            st.write('➖'*32)
+    elif "neutral" in question:
+        st.header("Neutral reviews")
+        for r in random.sample(neutral_list,20):
             st.write(f"⭐{r}")
             st.write('➖'*32)
     else:
-        st.header("Neutral reviews")
-        for r in random.sample(neutral_list,30):
-            st.write(f"⭐{r}")
-            st.write('➖'*32)
+        st.write("sentiment given is not clear")
 
     #st.session_state.messages.append({"role": "assistant", "content": response})

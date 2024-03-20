@@ -13,7 +13,10 @@ from langchain_core.prompts import ChatPromptTemplate
 
 # Dataset: Unstructured Data pdf
 
-st.header("⚡Analyze Unstructured Textual data")
+st.header("⚡ Analyze Unstructured Textual data")
+st.write("")
+st.write("🟣 Here you can analyze textual descriptions about your competitors products")
+st.write("🟣 Try some of the prompts in the drop down to begin")
 
 load_dotenv()
 
@@ -35,7 +38,7 @@ def get_res(question):
 
     retriever = vectorstore.as_retriever()
     template = """Answer the question based only on the following context:
-    {context}
+    {context}. 
     
     Question: {question}
     """
@@ -54,7 +57,28 @@ def get_res(question):
     )
     return rag_chain.invoke(question)
 
-if question := st.chat_input("How can I help"):
+option = st.selectbox(
+    'Query Unstructerd Data', (
+        'What kind of data is stored here',
+        'List all the watch names',
+        'What are some cons of the casio A168',
+        'What is the Tissot My Lady watch all about',
+        'What do you know about the casio a700',
+        'What are some issues in the Seiko 5 Automatic',
+        'What are some features of the Casio G Shock',
+        'A brief on the timex expedition'
+    ), index=None, placeholder='Try some default prompts to start out')
+
+if prompt := st.chat_input("How can I help"):
+    option = None
+
+if option or prompt:
+    if option:
+        question = option
+    else:
+        question = prompt
+    option = None
+    prompt = None
     with st.chat_message("Human"):
         st.markdown(question)
     st.session_state.messages1.append({"role": "Human", "content": question})
@@ -66,6 +90,6 @@ if question := st.chat_input("How can I help"):
 
         response = get_res(question)
 
-        st.write(response)
+        st.markdown(response)
 
         st.session_state.messages1.append({"role": "AI", "content": response})

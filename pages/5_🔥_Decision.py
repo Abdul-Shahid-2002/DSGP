@@ -172,6 +172,8 @@ df1 = read_csv("Customers.csv")
 db = load_vecDb()
 #st.write(df)
 
+st.subheader("🎈 Use a Vector Database to get 10 similar customers to the one you select!!!")
+st.text("Your customers with similar description will be retrieved below 🎈")
 gd = GridOptionsBuilder.from_dataframe(df1)
 gd.configure_pagination(enabled=True)
 gd.configure_default_column(editable=True)
@@ -184,7 +186,8 @@ if table["selected_rows"]:
     cus_des = row[0]["Customer_description"]
     sim_cus = db.similarity_search_with_score(cus_des,k=10)
     for doc, score in sim_cus:
-        st.write(f"🌟Content: {doc.page_content}, Metadata: {doc.metadata}, Score: {score}")
+        st.write(f"🌟Customer description:")
+        st.write(doc.page_content)
+        st.text(f"🎈Customer id: {doc.metadata['Customer_id'] - 1}")
+        st.text(f"🎈Similarity score: {score}")
         st.write('➖'*32)
-    # st.write(row[0]["Customer_id"])
-    # st.write(row[0]["Customer_description"])
